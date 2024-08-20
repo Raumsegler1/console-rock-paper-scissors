@@ -36,7 +36,8 @@ function playRound(humanChoice, computerChoice) {
                 return `You win! ${trimInsensitiveHumanChoice} beats ${computerChoice}`;
                 break;
             default:
-                return "that's not one of the options";
+                tie++;
+                return "that's not one of the options try again";
         }
     } else if (computerChoice === "paper"){
         switch (trimInsensitiveHumanChoice) {
@@ -49,7 +50,8 @@ function playRound(humanChoice, computerChoice) {
                 return `You win! ${trimInsensitiveHumanChoice} beats ${computerChoice}`;
                 break;
             default:
-                return "that's not one of the options";
+                tie++;
+                return "that's not one of the options try again";
         }
     } else if (computerChoice === "scissors"){
         switch (trimInsensitiveHumanChoice) {
@@ -62,7 +64,8 @@ function playRound(humanChoice, computerChoice) {
                 return `You win! ${trimInsensitiveHumanChoice} beats ${computerChoice}`;
                 break;
             default:
-                return "that's not one of the options";
+                tie++;
+                return "that's not one of the options try again";
         }
     } else {
         return "error computerChoice"
