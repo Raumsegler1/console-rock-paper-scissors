@@ -71,20 +71,19 @@ function playRound(humanChoice, computerChoice) {
         return "error computerChoice"
     }
 }
-let n;
+
 for (let i = 0; i !== (+rounds + +tie); i++) {
     console.log(playRound(getHumanChoice(), getComputerChoice()));
     console.log(humanScore);
     console.log(computerScore);
-    ++n;
 }
-if ((n === (+rounds)) && (humanScore > computerScore)) {
+if (humanScore > computerScore) {
     console.log(`You won this game of Rock Paper Scissors against the computer with a score of ${humanScore + " to " + computerScore}!`);
     return "Win"
-} else if ((n === (+rounds)) && (humanScore < computerScore)) {
+} else if (humanScore < computerScore) {
     console.log(`You lost this game of Rock Paper Scissors against the computer with a score of ${humanScore + " to " + computerScore}!`);
     return "Loss"
-} 
+}
 }
 
 playGame(prompt("How many rounds do you want to play, ideally an uneven Number", 5));
