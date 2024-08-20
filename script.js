@@ -17,11 +17,13 @@ function getHumanChoice() {
 function playGame(rounds) {
     let humanScore = 0;
     let computerScore = 0;
+    let tie = 0;
 
 function playRound(humanChoice, computerChoice) {
    let insensitiveHumanChoice = humanChoice.toLowerCase();
    let trimInsensitiveHumanChoice = insensitiveHumanChoice.trim();
     if (trimInsensitiveHumanChoice === computerChoice) {
+        tie++;
         return "It's a Tie!"
     } else if (computerChoice === "rock"){
         switch (trimInsensitiveHumanChoice) {
@@ -63,12 +65,12 @@ function playRound(humanChoice, computerChoice) {
                 return "that's not one of the options";
         }
     } else {
-        return "that's not one of the options"
+        return "error computerChoice"
     }
 }
 let n;
-for (let i = 0; i === (+rounds); ++i) {
-    playRound(getHumanChoice(), getComputerChoice);
+for (let i = 0; i !== (+rounds + +tie); i++) {
+    console.log(playRound(getHumanChoice(), getComputerChoice()));
     console.log(humanScore);
     console.log(computerScore);
     ++n;
@@ -82,4 +84,4 @@ if ((n === (+rounds)) && (humanScore > computerScore)) {
 } 
 }
 
-console.log(playGame(5));
+playGame(prompt("How many rounds do you want to play, ideally an uneven Number", 5));
