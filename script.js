@@ -14,90 +14,96 @@ const score = document.querySelector(".score")
 const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
+const setRounds = document.querySelector("#rounds")
+
+let rounds = 5;
+let humanScore = 0;
+let computerScore = 0;
 
 
-    let condition = true;
-    let humanScore = 0;
-    let computerScore = 0;
-    let tie = 0;
-
-function playGame(rounds) {
 function playRound(humanChoice, computerChoice) {
-    condition = false;
-   let insensitiveHumanChoice = humanChoice.toLowerCase();
-   let trimInsensitiveHumanChoice = insensitiveHumanChoice.trim();
-    if (trimInsensitiveHumanChoice === computerChoice) {
+    if (humanChoice === computerChoice) {
         display.textContent =  "It's a Tie!"
-        return;
+        
     } else if (computerChoice === "rock"){
-        switch (trimInsensitiveHumanChoice) {
+        switch (humanChoice) {
             case "scissors":
                 ++computerScore;
-                display.textContent =  `You lose! ${computerChoice} beats ${trimInsensitiveHumanChoice}`;
-                return;
+                display.textContent =  `You lose! ${computerChoice} beats ${humanChoice}`;
+                
                 break;
             case "paper":
                 ++humanScore;
-                display.textContent =  `You win! ${trimInsensitiveHumanChoice} beats ${computerChoice}`;
-                return;
+                display.textContent =  `You win! ${humanChoice} beats ${computerChoice}`;
+                
                 break;
             default:
                 display.textContent =  "that's not one of the options try again";
-                return;
+                
         }
     } else if (computerChoice === "paper"){
-        switch (trimInsensitiveHumanChoice) {
+        switch (humanChoice) {
             case "rock":
                 ++computerScore;
-                display.textContent =  `You lose! ${computerChoice} beats ${trimInsensitiveHumanChoice}`;
-                return;
+                display.textContent =  `You lose! ${computerChoice} beats ${humanChoice}`;
+                
                 break;
             case "scissors":
                 ++humanScore;
-                display.textContent =  `You win! ${trimInsensitiveHumanChoice} beats ${computerChoice}`;
-                return;
+                display.textContent =  `You win! ${humanChoice} beats ${computerChoice}`;
+                
                 break;
             default:
                 display.textContent =  "that's not one of the options try again";
-                return;
+                
         }
     } else if (computerChoice === "scissors"){
-        switch (trimInsensitiveHumanChoice) {
+        switch (humanChoice) {
             case "paper":
                 ++computerScore;
-                display.textContent =  `You lose! ${computerChoice} beats ${trimInsensitiveHumanChoice}`;
-                return;
+                display.textContent =  `You lose! ${computerChoice} beats ${humanChoice}`;
+                
                 break;
             case "rock":
                 ++humanScore;
-                display.textContent =  `You win! ${trimInsensitiveHumanChoice} beats ${computerChoice}`;
-                return;
+                display.textContent =  `You win! ${humanChoice} beats ${computerChoice}`;
+                
                 break;
             default:
                 display.textContent = "that's not one of the options try again";
-                return;
+                
         }
     } else {
         display.textContent =  "error computerChoice"
-        return;
+        
     }
+    if (rounds === humanScore + computerScore) {
+        if (humanScore > computerScore) {
+            display.textContent = `You won this game of Rock Paper Scissors against the computer with a score of ${humanScore + " to " + computerScore}!`;
+            humanScore = 0;
+            computerScore = 0;
+            return "Win";
+        } else if (humanScore < computerScore) {
+            display.textContent = `You lost this game of Rock Paper Scissors against the computer with a score of ${humanScore + " to " + computerScore}!`;
+            humanScore = 0;
+            computerScore = 0;
+            return "Loss";
+        }
+        } 
+        return;
 }
-    rock.addEventListener("click", () => playRound("rock", getComputerChoice()));
-    paper.addEventListener("click", () => playRound("paper", getComputerChoice()));
-    scissors.addEventListener("click", () => playRound("scissors", getComputerChoice()));
+    rock.addEventListener("click", () => {
+        playRound("rock", getComputerChoice());
+        score.textContent = `Your Score: ${humanScore} | The Computer's Score: ${computerScore}`
+    });
+    paper.addEventListener("click", () => {
+        playRound("paper", getComputerChoice());
+        score.textContent = `Your Score: ${humanScore} | The Computer's Score: ${computerScore}`
+    });
+    scissors.addEventListener("click", () => {
+        playRound("scissors", getComputerChoice());
+        score.textContent = `Your Score: ${humanScore} | The Computer's Score: ${computerScore}`
+    });
 
+    setRounds.addEventListener("click", () => rounds = Number(prompt("How many rounds should be in one game? Ideally an uneven Number", 5)))
 
-     score.textContent = `Your Score: ${humanScore} | The Computer's Score: ${computerScore}`
-
-if (rounds === humanScore + computerScore) {
-if (humanScore > computerScore) {
-    display.textContent = `You won this game of Rock Paper Scissors against the computer with a score of ${humanScore + " to " + computerScore}!`;
-    return "Win"
-} else if (humanScore < computerScore) {
-    display.textContent = `You lost this game of Rock Paper Scissors against the computer with a score of ${humanScore + " to " + computerScore}!`;
-    return "Loss"
-}
-} 
-}
-
-playGame(prompt("How many rounds do you want to play, ideally an uneven Number", 5));
