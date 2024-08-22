@@ -8,82 +8,96 @@ function getComputerChoice() {
         return "scissors"
     }
 }
+const display = document.querySelector(".display");
+const score = document.querySelector(".score")
 
-function getHumanChoice() {
-    return prompt("rock, paper, scissors", "")
-}
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
 
 
-function playGame(rounds) {
+    let condition = true;
     let humanScore = 0;
     let computerScore = 0;
     let tie = 0;
 
+function playGame(rounds) {
 function playRound(humanChoice, computerChoice) {
+    condition = false;
    let insensitiveHumanChoice = humanChoice.toLowerCase();
    let trimInsensitiveHumanChoice = insensitiveHumanChoice.trim();
     if (trimInsensitiveHumanChoice === computerChoice) {
-        tie++;
-        return "It's a Tie!"
+        display.textContent =  "It's a Tie!"
+        return;
     } else if (computerChoice === "rock"){
         switch (trimInsensitiveHumanChoice) {
             case "scissors":
                 ++computerScore;
-                return `You lose! ${computerChoice} beats ${trimInsensitiveHumanChoice}`;
+                display.textContent =  `You lose! ${computerChoice} beats ${trimInsensitiveHumanChoice}`;
+                return;
                 break;
             case "paper":
                 ++humanScore;
-                return `You win! ${trimInsensitiveHumanChoice} beats ${computerChoice}`;
+                display.textContent =  `You win! ${trimInsensitiveHumanChoice} beats ${computerChoice}`;
+                return;
                 break;
             default:
-                tie++;
-                return "that's not one of the options try again";
+                display.textContent =  "that's not one of the options try again";
+                return;
         }
     } else if (computerChoice === "paper"){
         switch (trimInsensitiveHumanChoice) {
             case "rock":
                 ++computerScore;
-                return `You lose! ${computerChoice} beats ${trimInsensitiveHumanChoice}`;
+                display.textContent =  `You lose! ${computerChoice} beats ${trimInsensitiveHumanChoice}`;
+                return;
                 break;
             case "scissors":
                 ++humanScore;
-                return `You win! ${trimInsensitiveHumanChoice} beats ${computerChoice}`;
+                display.textContent =  `You win! ${trimInsensitiveHumanChoice} beats ${computerChoice}`;
+                return;
                 break;
             default:
-                tie++;
-                return "that's not one of the options try again";
+                display.textContent =  "that's not one of the options try again";
+                return;
         }
     } else if (computerChoice === "scissors"){
         switch (trimInsensitiveHumanChoice) {
             case "paper":
                 ++computerScore;
-                return `You lose! ${computerChoice} beats ${trimInsensitiveHumanChoice}`;
+                display.textContent =  `You lose! ${computerChoice} beats ${trimInsensitiveHumanChoice}`;
+                return;
                 break;
             case "rock":
                 ++humanScore;
-                return `You win! ${trimInsensitiveHumanChoice} beats ${computerChoice}`;
+                display.textContent =  `You win! ${trimInsensitiveHumanChoice} beats ${computerChoice}`;
+                return;
                 break;
             default:
-                tie++;
-                return "that's not one of the options try again";
+                display.textContent = "that's not one of the options try again";
+                return;
         }
     } else {
-        return "error computerChoice"
+        display.textContent =  "error computerChoice"
+        return;
     }
 }
+    rock.addEventListener("click", () => playRound("rock", getComputerChoice()));
+    paper.addEventListener("click", () => playRound("paper", getComputerChoice()));
+    scissors.addEventListener("click", () => playRound("scissors", getComputerChoice()));
 
-for (let i = 0; i !== (+rounds + +tie); i++) {
-    console.log(playRound(getHumanChoice(), getComputerChoice()));
-    console.log(humanScore);
-    console.log(computerScore);
-}
+
+     score.textContent = `Your Score: ${humanScore} | The Computer's Score: ${computerScore}`
+
+if (rounds === humanScore + computerScore) {
 if (humanScore > computerScore) {
-    console.log(`You won this game of Rock Paper Scissors against the computer with a score of ${humanScore + " to " + computerScore}!`);
+    display.textContent = `You won this game of Rock Paper Scissors against the computer with a score of ${humanScore + " to " + computerScore}!`;
     return "Win"
 } else if (humanScore < computerScore) {
-    console.log(`You lost this game of Rock Paper Scissors against the computer with a score of ${humanScore + " to " + computerScore}!`);
+    display.textContent = `You lost this game of Rock Paper Scissors against the computer with a score of ${humanScore + " to " + computerScore}!`;
     return "Loss"
 }
+} 
 }
 
 playGame(prompt("How many rounds do you want to play, ideally an uneven Number", 5));

@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    font-size: 48px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.heading {
+    margin-top: 200px;
+}
+
+button {
+    font-size: 36px;
+    padding: 10px 50px;
+    width: 300px;
+    text-align: center;
+    background-color: rgb(219, 94, 48);
+    border-color: coral;
+    border-width: 5px;
+    border-radius: 8px;
+    color: white;
+}
